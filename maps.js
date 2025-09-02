@@ -984,6 +984,25 @@ let maps = [
 	},
 
 	{
+		name: "Centipede-RTK",
+		category: SPECIAL_CATEGORY,
+		default_check: true,
+		domain: "map.centipede-rtk.org",
+		getUrl(lat, lon, zoom) {
+			const [minlon, minlat, maxlon, maxlat] = latLonZoomToBbox(lat, lon, zoom);
+			return "https://map.centipede-rtk.org/index.php/view/map?repository=cent&project=centipede#" + minlon + "," + minlat + "," + maxlon + "," + maxlat;
+		},
+		getLatLonZoom(url) {
+			const match = url.match(/map\.centipede-rtk\.org.*.org\/.*#(-?\d[0-9.]+),(-?\d[0-9.]+),(-?\d[0-9.]+),(-?\d[0-9.]+)/);
+			if (match) {
+				let [, minlon, minlat, maxlon, maxlat] = match;
+				let [lat, lon, zoom] = bboxToLatLonZoom(minlon, minlat, maxlon, maxlat);
+				return [lat, lon, zoom];
+			}
+		},
+	},
+
+	{
 		name: "uMap",
 		category: OTHER_CATEGORY,
 		default_check: false,
