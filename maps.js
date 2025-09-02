@@ -993,7 +993,7 @@ let maps = [
 			return "https://map.centipede-rtk.org/index.php/view/map?repository=cent&project=centipede#" + minlon + "," + minlat + "," + maxlon + "," + maxlat;
 		},
 		getLatLonZoom(url) {
-			const match = url.match(/map\.centipede-rtk\.org.*.org\/.*#(-?\d[0-9.]+),(-?\d[0-9.]+),(-?\d[0-9.]+),(-?\d[0-9.]+)/);
+			const match = url.match(/map\.centipede-rtk\.org.*#(-?\d[0-9.]+),(-?\d[0-9.]+),(-?\d[0-9.]+),(-?\d[0-9.]+)/);
 			if (match) {
 				let [, minlon, minlat, maxlon, maxlat] = match;
 				let [lat, lon, zoom] = bboxToLatLonZoom(minlon, minlat, maxlon, maxlat);
